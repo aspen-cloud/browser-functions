@@ -1,0 +1,34 @@
+name: Digital-Ocean-Deploy
+
+on:
+  push:
+    branches:
+      - we/digital-ocean-test
+
+jobs:
+  deploy:
+    name: Deploy to DigitalOcean
+  
+    runs-on: ubuntu-latest
+  
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install
+
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: build
+      
+      - name: Copy file via scp
+        uses: appleboy/scp-action@master
+        env:
+          HOST: ${{ secrets.DIGITALOCEAN_HOST }}
+          USERNAME: ${{ secrets.DIGITALOCEAN_USERNAME }}
+          PASSWORD: ${{ secrets.DIGITALOCEAN_PASSWORD }}
+        with:
+          source: "."
+          target: "/home/will/dev/test"

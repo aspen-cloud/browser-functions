@@ -23,7 +23,7 @@ const config = {
     process.env.FUNCTIONS_ROOT || __dirname + "/../functions_root/",
   masterAccessKey: process.env.MASTER_ACCESS_KEY || "MASTER_ACCESS_KEY",
   level: process.env.LOG_LEVEL || "debug",
-  protocol: process.env.NODE_ENV === "production" ? "https" : "http",
+  protocol: process.env.NODE_ENV === "production" ? "http" : "http",
   isDev: process.env.NODE_ENV !== "production",
   inDocker: process.env.IN_DOCKER,
   portInfo:
