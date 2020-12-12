@@ -7,14 +7,14 @@
     <script>
         async function get(url) {
             const resp = await fetch(url);
-            if (res.status !== 200) {
+            if (resp.status !== 200) {
                 /**
                  * Since this function is only used here and gets try-catch'ed anyway we'll just return null
                  */
                 // throw new Error(res.statusText);
                 return null; 
             }
-            return res.text();
+            return resp.text();
         }
 
         // load and execute function specified in URL param
@@ -28,7 +28,7 @@
         } else {
             let funcPath = params.get("bf")
             let rootPath = funcPath.substring(0, funcPath.lastIndexOf("/")) + "/"
-            let type = funcPath.split(".")[1] // A file called `index.jsx.js` will return 'jsx';
+            let type = funcPath.split(".")[1]; // A file called `index.jsx.js` will return 'jsx';
 
             (async () => {
                 try {
